@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>India Country Details</h1>
+  <div id="container"></div>
+
+  <script>
+    const container = document.querySelector("#container");
+
+    const request = new XMLHttpRequest();
+
+    request.open("GET", "https://restcountries.com/v3.1/name/india");
+
+    request.send();
+
+    request.addEventListener("load", function () {
+      const [data] = JSON.parse(this.responseText);
+
+      container.innerHTML = `
+    <div id="card">
+  <article class="card">
+    <div class="card-body">
+      <img src="${data.flags.png}" alt="" class="card-body-img" />
+      <h1 class="card-body-title">
+        ${data.name.common}<span></span>
+      </h1>
+      <p class="card-body-text"> capital : ${data.capital}</p>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-social">
+        <h3>${data.continents}</h3>
+        <p>Continent</p>
+      </div>
+      <div class="card-footer-social">
+        <h3> ${data.population}</h3>
+        <p>Population</p>
+      </div>
+      <div class="card-footer-social">
+        <h3>${data.currencies.INR.name}</h3>
+        <p>Currency</p>
+       </div>
+        <div class="card-footer-social">
+        <h3>${data.languages.hin}</h3>
+        <p>Language</p>
+        </div>
+        <div class="card-footer-social">
+        <h3>${data.subregion}</h3>
+        <p>Subregion</p>
+      </div>
+      <div>
+      </div>
+    </div>
+    </div>
+  </article>
+</div>
+    `
+    });
+  </script>
+</body>
+
+</html>

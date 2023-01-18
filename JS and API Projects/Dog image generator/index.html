@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cute Dog Image</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <style>
+        img {
+            width: 600px;
+            border-radius: 7px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            width: 200px;
+            height: 40px;
+            color: rgb(73, 42, 165);
+        }
+    </style>
+</head>
+
+<body bgcolor="yellow">
+    <h1>Random dog photos &#128021;</h1>
+    <button id="btn">Generate</button>
+    <img id="dogImg" src="#" alt="" />
+
+    <script>
+        $("#btn").click(function () {
+            $.getJSON("https://dog.ceo/api/breeds/image/random")
+                .done(addDog)
+                .fail(function () {
+                    console.log("Dog fetch failed!");
+                });
+        });
+
+        function addDog(data) {
+            $("#dogImg").attr("src", data.message);
+        }
+    </script>
+</body>
+
+</html>

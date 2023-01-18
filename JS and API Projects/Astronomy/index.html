@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astronomy Picture of the Day</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container my-5">
+        <section class="text-center mb-4">
+            <h1 class="mb-4">
+                <strong>Astronomy Picture of the Day 2023
+                    &#128640;(<u id="intro-date"></u>)</strong>
+            </h1>
+            <p>
+                Each day a different image or photograph of our universe
+                is featured, along with a brief explanation written by a professional
+                astronomer.
+            </p>
+        </section>
+
+        <div class="form-outline datepicker" data-mdb-toggle-button="true" data-mdb-format="yyyy-mm-dd"
+            id="date-picker">
+            <input type="text" class="form-control" id="wrapper-date" data-mdb-toggle="datepicker" value="" />
+
+            <div class="row">
+                <div class="col-md-8 mb-4 mb-md-0">
+
+                    <section id="wrapper-media" class=""></section>
+
+                </div>
+
+                <div class="col-md-4 mb-4 mb-md-0">
+
+                    <section class="">
+                        <h5 id="wrapper-title"></h5>
+                        <p class="text-muted mb-2">
+                            Copyright: <span id="wrapper-copyright"></span>
+                        </p>
+                        <i>
+                            <p id="wrapper-explanation"></p>
+                        </i>
+                    </section>
+
+                </div>
+            </div>
+            </section>
+
+            <script>
+
+                function nasaRequest() {
+                    let xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            let data = JSON.parse(this.responseText);
+                            let copyright = data["copyright"];
+                            let date = data["date"];
+                            let explanation = data["explanation"];
+                            let hdurl = data["hdurl"];
+                            let media_type = data["media_type"];
+                            let title = data["title"];
+                            let url = data["url"];
+                            let imageType = `
+                <div
+                  class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                  data-ripple-color="light"
+                >
+                  <img id="wrapper-image" src="" class="w-100" />
+                  <a id="wrapper-hdurl" href="" target="_blank">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                  </a>
+                </div>
+                `;
+
+                            document.getElementById("wrapper-title").innerHTML = title;
+                            document.getElementById("wrapper-explanation").innerHTML = explanation;
+                            document.getElementById("wrapper-copyright").innerHTML = copyright;
+                            document.getElementById("intro-date").innerHTML = date;
+
+                            if (media_type === "video") {
+                                document.getElementById("wrapper-media").innerHTML = videoType;
+                                document.getElementById("wrapper-video").src = url;
+                            } else {
+                                document.getElementById("wrapper-media").innerHTML = imageType;
+                                document.getElementById("wrapper-image").src = url;
+                                document.getElementById("wrapper-hdurl").href = hdurl;
+                            }
+                        }
+                    };
+
+                    let datepicker_date = document.getElementById("wrapper-date").value;
+                    let queryUrl = "https://api.nasa.gov/planetary/apod?";
+                    let queryKey = "api_key=DaFi4M1aSffvFg0EGzfCxWruc6FyhR7wStWMPtxf&";
+                    let queryDate = "date=" + datepicker_date + "&";
+                    let queryFull = queryUrl + queryKey + queryDate;
+                    xmlhttp.open("GET", queryFull, true);
+                    xmlhttp.send();
+                }
+                nasaRequest();
+
+                nasaRequest().onload;
+
+            </script>
+
+
+
+
+</body>
+
+</html>

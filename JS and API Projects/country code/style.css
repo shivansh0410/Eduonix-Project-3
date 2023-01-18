@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
+
+        * {
+            margin: 0;
+
+            font-family: "Merriweather", serif;
+        }
+
+        :root {
+            --card-bg-color: rgba(247, 247, 247, 0);
+            --card-shadow-color: rgba(0, 0, 0, 0.7);
+            --primary-color: #5f0202;
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 88%;
+        }
+
+        body {
+            background-image: url("https://lh3.googleusercontent.com/p/AF1QipNjQ5SJFQ43S6nQHYkSflVjCaHqQGQdS8eEIL1f=s1360-w1360-h1020");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: sans-serif;
+            background-color: var(--bg-color);
+            display: grid;
+            place-items: center;
+            height: 90vh;
+        }
+
+        .container {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            margin: 30px auto;
+            width: 500px;
+            border-radius: 40px;
+            box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+                -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .card-body-title {
+            margin-top: 2rem;
+            font-size: 1.8rem;
+            text-transform: capitalize;
+        }
+
+        .card-body-title span {
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        .card-body-text {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .card-footer-social {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-footer-social p {
+            letter-spacing: 1px;
+        }
+
+        .card:hover {
+            transform: scale(0.9, 0.9);
+            box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+                -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+        }
